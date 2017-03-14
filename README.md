@@ -9,7 +9,7 @@ all with the opened tunnel.
 
 The app uses the NabtoClient Cocoapod, so to build and run, perform the following steps:
 
-1. Install dependencies: `$ pod install` (see https://www.cocoapods.org for info on installation the pod tool)
+1. Install dependencies: `$ pod install` (see https://www.cocoapods.org for info on installation of the pod tool)
 
 2. Open the generated workspace in XCode and work from there: `open NabtoTunnelSwiftExample.xcworkspace`
 

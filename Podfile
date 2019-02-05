@@ -1,4 +1,4 @@
 target 'NabtoTunnelSwiftExample' do
   use_frameworks!
-  pod 'NabtoClient', '3.0.15'
+  pod 'NabtoClient', '5.0.1'
 end

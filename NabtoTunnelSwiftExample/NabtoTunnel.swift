@@ -17,25 +17,25 @@ import Foundation
 
 class NabtoTunnel {
 
-    var tunnel: nabto_tunnel_t? = nil
+    var tunnel: NabtoTunnelHandle? = nil
     var tunnelTimer: Timer? = nil
     let nabto = { return NabtoClient.instance() as! NabtoClient }()
 
     func start() -> Bool {
         var status = nabto.nabtoStartup()
-        if (status != NABTO_OK) {
+        if (status != .NCS_OK) {
             print("Nabto startup failed: \(status)")
             return false
         }
         
         status = nabto.nabtoOpenSessionGuest()
-        if (status != NABTO_OK) {
+        if (status != .NCS_OK) {
             print("Open session failed: \(status)")
             return false
         }
         
         status = nabto.nabtoTunnelOpenTcp(&tunnel, toHost:"streamdemo.nabto.net", onPort: 80)
-        if (status == NABTO_OK) {
+        if (status == .NCS_OK) {
             print("Open tunnel succeeded, polling state to know when ready to use")
             self.startPeriodicStatusCheck()
             return true;
@@ -56,7 +56,7 @@ class NabtoTunnel {
     
     @objc func checkTunnelStatus() {
         let tunnelState = nabto.nabtoTunnelInfo(tunnel)
-        if (tunnelState == NTCS_CONNECTING) {
+        if (tunnelState == .NTS_CONNECTING) {
             print(".", terminator:"")
         } else {
             tunnelTimer?.invalidate()
@@ -73,11 +73,11 @@ class NabtoTunnel {
         }
     }
     
-    func isConnected(tunnelState: nabto_tunnel_state_t) -> Bool {
-        return tunnelState == NTCS_LOCAL ||
-            tunnelState == NTCS_REMOTE_P2P ||
-            tunnelState == NTCS_REMOTE_RELAY ||
-            tunnelState == NTCS_REMOTE_RELAY_MICRO
+    func isConnected(tunnelState: NabtoTunnelState) -> Bool {
+        return tunnelState == .NTS_LOCAL ||
+            tunnelState == .NTS_REMOTE_P2P ||
+            tunnelState == .NTS_REMOTE_RELAY ||
+            tunnelState == .NTS_REMOTE_RELAY_MICRO
     }
     
 }

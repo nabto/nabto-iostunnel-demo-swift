@@ -1,3 +1,7 @@
+# Deprecated - better demo introduced
+
+Please take a look at https://github.com/nabto/nabto-ios-helloworld instead.
+
 # Nabto Tunnel Demo in Swift
 
 Empty app that just demonstrates the necessary plumbing and API
